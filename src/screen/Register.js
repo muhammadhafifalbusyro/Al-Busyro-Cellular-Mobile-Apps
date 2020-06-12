@@ -3,43 +3,21 @@ import {
   View,
   Text,
   StyleSheet,
-  ActivityIndicator,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
 
-class Login extends React.Component {
+class Register extends React.Component {
   state = {
-    splash: true,
     username: '',
+    phoneNumber: '',
     password: '',
+    passwordConfirm: '',
   };
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({splash: false});
-    }, 3000);
-  }
-
-  splashScreen() {
-    if (this.state.splash) {
-      return (
-        <View style={styles.splashScreen}>
-          <Text style={styles.textSplashScreen}>ABC</Text>
-          <Text style={styles.textAppVersion}>Versi 1.0</Text>
-          <ActivityIndicator size="large" color="white" />
-        </View>
-      );
-    } else {
-      return false;
-    }
-  }
   render() {
     return (
       <View style={styles.container}>
-        {this.splashScreen()}
-        <View style={styles.templateLogin}>
-          <Text style={styles.counterName}> ABC </Text>
-          <Text style={styles.counterName2}> AL BUSYRO CELLULAR </Text>
+        <View style={styles.templateRegister}>
           <TextInput
             value={this.state.username}
             style={styles.inputUsername}
@@ -51,74 +29,60 @@ class Login extends React.Component {
             }}
           />
           <TextInput
-            value={this.state.password}
-            style={styles.inputPassword}
-            placeholder="Kata Sandi"
-            secureTextEntry={true}
-            onChangeText={text => this.setState({password: text})}
+            value={this.state.phoneNumber}
+            style={styles.inputPhoneNumber}
+            placeholder="Nomor Hp"
+            onChangeText={text => this.setState({phoneNumber: text})}
             ref={input => {
               this.secondTextInput = input;
             }}
+            keyboardType="number-pad"
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              this.thirdTextInput.focus();
+            }}
           />
-          <TouchableOpacity style={styles.buttonLogin} activeOpacity={0.7}>
-            <Text style={styles.textButtonLogin}>Masuk</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonRegister}
-            activeOpacity={0.7}
-            onPress={() => this.props.navigation.navigate('Register')}>
-            <Text style={styles.textButtonRegister}>Daftar Anggota</Text>
+          <TextInput
+            value={this.state.password}
+            style={styles.inputPassword}
+            placeholder="Kata Sandi"
+            onChangeText={text => this.setState({password: text})}
+            ref={input => {
+              this.thirdTextInput = input;
+            }}
+          />
+          <TouchableOpacity style={styles.buttonRegister} activeOpacity={0.7}>
+            <Text style={styles.textButtonLogin}>Daftar Anggota</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
 }
-export default Login;
-
-const primaryColor = 'deepskyblue';
+export default Register;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  splashScreen: {
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: primaryColor,
-  },
-  textSplashScreen: {
-    fontSize: 70,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  textAppVersion: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: '5%',
-  },
-  templateLogin: {
+  templateRegister: {
     height: '100%',
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  counterName: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: primaryColor,
-  },
-  counterName2: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: primaryColor,
-    marginBottom: '10%',
-  },
   inputUsername: {
+    height: 50,
+    width: '80%',
+    borderWidth: 1,
+    fontSize: 16,
+    borderRadius: 3,
+    padding: 10,
+    backgroundColor: 'rgba(52, 52, 52, 0.05)',
+    marginBottom: '5%',
+  },
+  inputPhoneNumber: {
     height: 50,
     width: '80%',
     borderWidth: 1,
