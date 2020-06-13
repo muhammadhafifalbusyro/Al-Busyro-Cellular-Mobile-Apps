@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   TextInput,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 class Login extends React.Component {
@@ -14,18 +15,14 @@ class Login extends React.Component {
     username: '',
     password: '',
   };
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({splash: false});
-    }, 3000);
-  }
-
   splashScreen() {
     if (this.state.splash) {
       return (
         <View style={styles.splashScreen}>
-          <Text style={styles.textSplashScreen}>ABC</Text>
-          <Text style={styles.textAppVersion}>Versi 1.0</Text>
+          <Image
+            source={require('../assets/images/abc2.png')}
+            style={{marginBottom: '10%'}}
+          />
           <ActivityIndicator size="large" color="white" />
         </View>
       );
@@ -34,12 +31,17 @@ class Login extends React.Component {
     }
   }
   render() {
+    setTimeout(() => {
+      this.setState({splash: false});
+    }, 3000);
     return (
       <View style={styles.container}>
         {this.splashScreen()}
         <View style={styles.templateLogin}>
-          <Text style={styles.counterName}> ABC </Text>
-          <Text style={styles.counterName2}> AL BUSYRO CELLULAR </Text>
+          <Image
+            source={require('../assets/images/abc.png')}
+            style={styles.logoLogin}
+          />
           <TextInput
             value={this.state.username}
             style={styles.inputUsername}
@@ -60,7 +62,10 @@ class Login extends React.Component {
               this.secondTextInput = input;
             }}
           />
-          <TouchableOpacity style={styles.buttonLogin} activeOpacity={0.7}>
+          <TouchableOpacity
+            style={styles.buttonLogin}
+            activeOpacity={0.7}
+            onPress={() => this.props.navigation.navigate('Home')}>
             <Text style={styles.textButtonLogin}>Masuk</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -94,11 +99,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
-  textAppVersion: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: '5%',
+  logoLogin: {
+    marginBottom: '10%',
   },
   templateLogin: {
     height: '100%',
@@ -106,17 +108,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-  },
-  counterName: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: primaryColor,
-  },
-  counterName2: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: primaryColor,
-    marginBottom: '10%',
   },
   inputUsername: {
     height: 50,

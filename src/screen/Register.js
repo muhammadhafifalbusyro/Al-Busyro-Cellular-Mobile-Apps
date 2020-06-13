@@ -14,6 +14,69 @@ class Register extends React.Component {
     password: '',
     passwordConfirm: '',
   };
+  konfirmasiKataSandi() {
+    if (
+      this.state.password === this.state.passwordConfirm &&
+      this.state.password === ''
+    ) {
+      return (
+        <TextInput
+          value={this.state.passwordConfirm}
+          style={styles.inputPasswordConfirm}
+          secureTextEntry={true}
+          placeholder="Konfirmasi Kata Sandi"
+          onChangeText={text => this.setState({passwordConfirm: text})}
+          ref={input => {
+            this.fourthTextInput = input;
+          }}
+        />
+      );
+    } else if (
+      this.state.password === this.state.passwordConfirm &&
+      this.state.password != ''
+    ) {
+      return (
+        <TextInput
+          value={this.state.passwordConfirm}
+          style={styles.inputPasswordConfirmTrue}
+          secureTextEntry={true}
+          onChangeText={text => this.setState({passwordConfirm: text})}
+          ref={input => {
+            this.fourthTextInput = input;
+          }}
+        />
+      );
+    } else if (
+      this.state.password != this.state.passwordConfirm &&
+      this.state.passwordConfirm === ''
+    ) {
+      return (
+        <TextInput
+          value={this.state.passwordConfirm}
+          style={styles.inputPasswordConfirm}
+          secureTextEntry={true}
+          placeholder="Konfirmasi Kata Sandi"
+          onChangeText={text => this.setState({passwordConfirm: text})}
+          ref={input => {
+            this.fourthTextInput = input;
+          }}
+        />
+      );
+    } else {
+      return (
+        <TextInput
+          value={this.state.passwordConfirm}
+          style={styles.inputPasswordConfirmWrong}
+          secureTextEntry={true}
+          placeholderTextColor="red"
+          onChangeText={text => this.setState({passwordConfirm: text})}
+          ref={input => {
+            this.fourthTextInput = input;
+          }}
+        />
+      );
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -45,14 +108,26 @@ class Register extends React.Component {
           <TextInput
             value={this.state.password}
             style={styles.inputPassword}
+            secureTextEntry={true}
             placeholder="Kata Sandi"
             onChangeText={text => this.setState({password: text})}
+            returnKeyType="next"
             ref={input => {
               this.thirdTextInput = input;
             }}
+            onSubmitEditing={() => {
+              this.fourthTextInput.focus();
+            }}
           />
+          {this.konfirmasiKataSandi()}
           <TouchableOpacity style={styles.buttonRegister} activeOpacity={0.7}>
             <Text style={styles.textButtonLogin}>Daftar Anggota</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonLogin}
+            activeOpacity={0.7}
+            onPress={() => this.props.navigation.navigate('Login')}>
+            <Text style={styles.textButtonRegister}>Masuk</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -96,6 +171,38 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
     borderWidth: 1,
+    fontSize: 16,
+    borderRadius: 3,
+    padding: 10,
+    backgroundColor: 'rgba(52, 52, 52, 0.05)',
+    marginBottom: '5%',
+  },
+  inputPasswordConfirm: {
+    height: 50,
+    width: '80%',
+    borderWidth: 1,
+    fontSize: 16,
+    borderRadius: 3,
+    padding: 10,
+    backgroundColor: 'rgba(52, 52, 52, 0.05)',
+    marginBottom: '5%',
+  },
+  inputPasswordConfirmWrong: {
+    height: 50,
+    width: '80%',
+    borderWidth: 1,
+    borderColor: 'red',
+    fontSize: 16,
+    borderRadius: 3,
+    padding: 10,
+    backgroundColor: 'rgba(52, 52, 52, 0.05)',
+    marginBottom: '5%',
+  },
+  inputPasswordConfirmTrue: {
+    height: 50,
+    width: '80%',
+    borderWidth: 1,
+    borderColor: 'lime',
     fontSize: 16,
     borderRadius: 3,
     padding: 10,
