@@ -9,6 +9,25 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 class RiwayatTransaksi extends React.Component {
+  state = {
+    data: [
+      {
+        timeStamp: ['09/09/2020', '20:30'],
+        keterangan: 'pulsa xl 10000',
+        status: 'sukses',
+      },
+      {
+        timeStamp: ['09/09/2020', '20:30'],
+        keterangan: 'pulsa xl 10000',
+        status: 'gagal',
+      },
+      {
+        timeStamp: ['09/09/2020', '20:30'],
+        keterangan: 'pulsa xl 10000',
+        status: 'dalam proses',
+      },
+    ],
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -16,142 +35,33 @@ class RiwayatTransaksi extends React.Component {
           <Text style={styles.textHeader}>Riwayat Transaksi</Text>
         </View>
         <ScrollView style={{width: '100%'}}>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
-          <View
-            style={{
-              height: 70,
-              width: '100%',
-              backgroundColor: 'white',
-              padding: '2%',
-              marginBottom: '2%',
-            }}>
-            <Text>Waktu : 09/09/2020 || 20:30</Text>
-            <Text>Keterangan : pulsa xl 10000</Text>
-            <Text>Status : Sukses</Text>
-          </View>
+          {this.state.data.map((value, key) => {
+            let colorStatus = '';
+            if (value.status === 'sukses') {
+              colorStatus = 'green';
+            } else if (value.status === 'dalam proses') {
+              colorStatus = 'orange';
+            } else if (value.status === 'gagal') {
+              colorStatus = 'red';
+            }
+            return (
+              <View style={styles.fieldHistoryTransaction} key={key}>
+                <Text>
+                  Time Stamp : {value.timeStamp[0]} || {value.timeStamp[1]}
+                </Text>
+                <Text>Keterangan : {value.keterangan}</Text>
+                <Text>
+                  Status :{' '}
+                  <Text style={{fontWeight: 'bold', color: colorStatus}}>
+                    {value.status}
+                  </Text>
+                </Text>
+              </View>
+            );
+          })}
         </ScrollView>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={{
-            height: 50,
-            width: 50,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 100,
-            backgroundColor: 'deepskyblue',
-            position: 'absolute',
-            zIndex: 1,
-            bottom: '5%',
-            right: '10%',
-          }}>
-          <Icon name="trash" size={30} color="white" />
+        <TouchableOpacity activeOpacity={0.7} style={styles.deleteButton}>
+          <Icon name="trash" size={25} color="white" />
         </TouchableOpacity>
       </View>
     );
@@ -175,5 +85,25 @@ const styles = StyleSheet.create({
   textHeader: {
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  fieldHistoryTransaction: {
+    height: 70,
+    width: '100%',
+    backgroundColor: 'white',
+    padding: '2%',
+    marginBottom: '2%',
+  },
+  deleteButton: {
+    height: 50,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
+    backgroundColor: 'deepskyblue',
+    position: 'absolute',
+    zIndex: 1,
+    bottom: '5%',
+    right: '10%',
+    elevation: 2,
   },
 });

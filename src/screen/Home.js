@@ -15,19 +15,19 @@ class Home extends React.Component {
       {
         iconName: 'phone',
         size: 35,
-        color: 'green',
+        color: 'deepskyblue',
         title: 'PULSA',
       },
       {
         iconName: 'wifi',
         size: 35,
-        color: 'orange',
+        color: 'deepskyblue',
         title: 'PAKET DATA',
       },
       {
         iconName: 'bolt',
         size: 35,
-        color: 'blue',
+        color: 'deepskyblue',
         title: 'T. LISTRIK',
       },
     ],

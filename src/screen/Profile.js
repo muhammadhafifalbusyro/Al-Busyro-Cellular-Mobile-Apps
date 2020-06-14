@@ -23,7 +23,7 @@ class Profile extends React.Component {
             />
             <TouchableOpacity activeOpacity={0.7}>
               <View style={styles.camera}>
-                <Icon name="camera" size={30} color="white" />
+                <Icon name="camera" size={25} color="white" />
               </View>
             </TouchableOpacity>
           </View>
@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   camera: {
-    height: 40,
-    width: 50,
+    height: 35,
+    width: 45,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(52, 52, 52, 0.2)',
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   blank: {
-    height: '5%',
+    height: '8%',
     width: '100%',
   },
   identBox: {

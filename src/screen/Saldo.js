@@ -10,13 +10,13 @@ class Saldo extends React.Component {
       {
         iconName: 'arrow-alt-circle-up',
         size: 35,
-        color: 'green',
+        color: 'deepskyblue',
         title: 'TOP UP',
       },
       {
         iconName: 'arrow-alt-circle-right',
         size: 35,
-        color: 'orange',
+        color: 'deepskyblue',
         title: 'TRANSFER',
       },
     ],
