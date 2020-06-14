@@ -4,8 +4,8 @@ import {View, Text} from 'react-native';
 class ChatAdmin extends React.Component {
   render() {
     return (
-      <View>
-        <Text>ini Chat Admin</Text>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>COMING SOON</Text>
       </View>
     );
   }
