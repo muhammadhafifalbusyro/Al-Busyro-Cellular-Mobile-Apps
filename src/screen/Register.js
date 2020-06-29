@@ -14,6 +14,25 @@ class Register extends React.Component {
     password: '',
     passwordConfirm: '',
   };
+  register() {
+    fetch('http://192.168.1.10:8888/albusyrocellularapi/api/register', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        no_hp: this.state.phoneNumber,
+        password: this.state.password,
+      }),
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        alert(responseJson.message);
+      })
+      .catch(error => console.log(error));
+  }
   konfirmasiKataSandi() {
     if (
       this.state.password === this.state.passwordConfirm &&
@@ -120,7 +139,10 @@ class Register extends React.Component {
             }}
           />
           {this.konfirmasiKataSandi()}
-          <TouchableOpacity style={styles.buttonRegister} activeOpacity={0.7}>
+          <TouchableOpacity
+            style={styles.buttonRegister}
+            activeOpacity={0.7}
+            onPress={() => this.register()}>
             <Text style={styles.textButtonLogin}>Daftar Anggota</Text>
           </TouchableOpacity>
           <TouchableOpacity
