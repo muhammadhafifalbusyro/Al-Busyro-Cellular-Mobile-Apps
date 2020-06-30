@@ -9,7 +9,7 @@ import {
   Modal,
   ActivityIndicator,
 } from 'react-native';
-
+//
 class Register extends React.Component {
   state = {
     username: '',
