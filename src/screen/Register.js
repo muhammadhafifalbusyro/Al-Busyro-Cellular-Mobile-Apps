@@ -5,6 +5,9 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ToastAndroid,
+  Modal,
+  ActivityIndicator,
 } from 'react-native';
 
 class Register extends React.Component {
@@ -13,25 +16,47 @@ class Register extends React.Component {
     phoneNumber: '',
     password: '',
     passwordConfirm: '',
+    modalVisible: true,
   };
   register() {
-    fetch('http://192.168.1.10:8888/albusyrocellularapi/api/register', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: this.state.username,
-        no_hp: this.state.phoneNumber,
-        password: this.state.password,
-      }),
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        alert(responseJson.message);
+    let {username, phoneNumber, password, passwordConfirm} = this.state;
+    if (
+      (username == '', phoneNumber == '', password == '', passwordConfirm == '')
+    ) {
+      ToastAndroid.show(
+        'Data cannot be empty',
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
+    } else {
+      fetch('http://192.168.1.10:8888/albusyrocellularapi/api/register', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: this.state.username,
+          no_hp: this.state.phoneNumber,
+          password: this.state.password,
+        }),
       })
-      .catch(error => console.log(error));
+        .then(response => response.json())
+        .then(responseJson => {
+          ToastAndroid.show(
+            responseJson.message,
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+          );
+        })
+        .catch(error =>
+          ToastAndroid.show(
+            'Registration failed',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+          ),
+        );
+    }
   }
   konfirmasiKataSandi() {
     if (
@@ -99,6 +124,17 @@ class Register extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <ActivityIndicator size="large" color="deepskyblue" />
+              <Text style={styles.modalText}>Loading ...</Text>
+            </View>
+          </View>
+        </Modal>
         <View style={styles.templateRegister}>
           <TextInput
             value={this.state.username}
@@ -264,5 +300,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: 'white',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalView: {
+    backgroundColor: 'white',
+    height: 100,
+    width: 100,
+    borderRadius: 10,
+    elevation: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalText: {
+    marginTop: 10,
+    color: 'grey',
+    textAlign: 'center',
   },
 });
