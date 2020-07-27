@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-
+//define class
 class Login extends React.Component {
   state = {
     splash: true,
